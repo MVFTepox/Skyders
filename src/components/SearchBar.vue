@@ -1,26 +1,25 @@
 <template>
     <div class="w-full sm:w-[80%] flex flex-col gap-4">
         <div class="rounded-xl text-black bg-rosy  sm:h-12 h-18 font-made-tommy flex ">
-            <div class="search-section" @click="openStateMenu">Todo México</div>
-            <div class="search-section">
-                Cualquier fecha
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:size-6 size-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                </svg>
+            <div class="search-section sm:w-1/5 w-[28%]" >
+                <select name="" id="" class="bg-rosy outline-none focus:text-magenta w-full">
+                    <option value="Todos">Todo México</option>
+                    <option v-for="state in statesInMexico" :key="state" :value="state">{{ state }}</option>
+                </select>
             </div>
-            <div class="cursor-pointer flex items-center p-2 sm:justify-between">
-                Artista, evento, tipo de evento o inmueble
-                <svg @click="search" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sm:size-6 size-12 ">
+            <div class="search-section sm:w-1/5 w-[27%]">
+                <input type="text" placeholder="Cualquier fecha" class="bg-rosy outline-none cursor-pointer placeholder:text-black focus:text-magenta w-full" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+            </div>
+            <div class="cursor-pointer flex items-center sm:w-3/5 w-[45%] p-2 sm:justify-between">
+                <textarea name="" id="" class="bg-rosy outline-none placeholder:text-black focus:placeholder:text-magenta w-full h-[90%] text-wrap self-end" placeholder="Artista, evento, tipo de evento o inmueble"></textarea>
+                <svg @click="search" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 sm:size-8 ">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
 
             </div>
         </div>
-        <select name="" id="" v-if="isStateMenuOpen">
-            <option value="so">Estados</option>
-        </select>
-        <input type="date" name="" id="">
-        <div v-if="areResultsVisible" class="bg-magenta w-full  h-[400px] rounded-2xl overflow-y-scroll">
+        <div v-if="areResultsVisible" class="bg-gradient-to-t from-[#87003f] from-10% to-magenta to-30% w-full  h-[400px] rounded-2xl overflow-y-scroll">
             <SearchResultItem v-for="item in 3" :key="3" :img="event.img" 
             :eventName="event.eventName" 
             :eventType="event.eventType" 
@@ -39,12 +38,9 @@
 <script setup>
 import { ref } from 'vue'
 import SearchResultItem from './SearchResultItem.vue';
-const areResultsVisible = ref(true)
-const isStateMenuOpen = ref(false)
+const areResultsVisible = ref(false)
 const event = ref({img: 'https://i.pinimg.com/736x/de/17/5b/de175b2222cc1981b68fc3774c157d72.jpg', eventName: "The Eras Tour", eventType: "Concierto", state: "New York", venue: "Madison Square Garden", time: "8:00 PM", month: "Septiembre", day: "15", year: "2023", dayOfWeek: "Lunes"})
-function openStateMenu(){
-    isStateMenuOpen.value = !isStateMenuOpen.value
-}
+const statesInMexico = ref (['Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Estado de México','Guanajuato','Guerrero','Hidalgo','Jalisco', 'Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'])
 function search(){
     areResultsVisible.value = !areResultsVisible.value
 }
@@ -63,7 +59,23 @@ function search(){
     svg:hover{
         @apply text-magenta;
     }
-    .bg-magenta::-webkit-scrollbar {
+    .to-magenta::-webkit-scrollbar {
     display: none;
     }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+
+}
+textarea{
+    resize: none;
+
+}
+::placeholder{
+    @apply text-sm;
+    @apply sm:text-base;
+}
+select{
+    @apply text-sm;
+    @apply sm:text-base;
+}
+
 </style>
