@@ -1,9 +1,10 @@
 <template>
-        <button :class="[`bg-${props.color}`,'hover:shadow-lg', `hover:shadow-${props.color}/50`, 'hover:scale-105' ]"><slot></slot></button>
+        <button :class="[`bg-${props.color}`, 'hover:scale-105', 'hover:shadow-lg']" ><slot></slot></button>
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
+import {defineProps } from 'vue'
+
 const props = defineProps({
     color: String
 })
@@ -20,6 +21,6 @@ button{
     @apply w-56;
     @apply transition;
     @apply duration-500;
+    
 }
-
 </style>

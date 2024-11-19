@@ -3,9 +3,12 @@
   <div class="bg-black h-screen flex flex-wrap justify-center gap-12">
     <HomeEventItem v-for="item in arr" :key="item" :eventName="item.eventName" :eventType="item.eventType" :img="item.img"></HomeEventItem>
     <div class="flex flex-col gap-4 p-6 w-full items-center">
+      <EventPopup img="https://i.pinimg.com/564x/03/0c/a2/030ca2afa8b5358993a95485b0a0bd2f.jpg" isliked="true" />
+
       <SearchBar></SearchBar>
       
     </div>
+
   </div>
 
   <p class="text-3xl">pagina de test</p>
@@ -19,6 +22,7 @@ import CustomButton from './CustomButton.vue';
 import HomeEventItem from './HomeEventItem.vue';
 import SearchResultItem from './SearchResultItem.vue';
 import SearchBar from './SearchBar.vue';
+import EventPopup from './EventPopup.vue';
 const arr = [
   {img: "https://i.pinimg.com/736x/de/17/5b/de175b2222cc1981b68fc3774c157d72.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
   {img: "https://i.pinimg.com/564x/03/0c/a2/030ca2afa8b5358993a95485b0a0bd2f.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
