@@ -11,7 +11,7 @@
                 <input type="text" placeholder="Cualquier fecha" class="bg-rosy outline-none cursor-pointer placeholder:text-black focus:text-magenta w-full" onfocus="(this.type='date')" onblur="(this.type='text')">
 
             </div>
-            <div class="cursor-pointer flex items-center sm:w-3/5 w-[45%] p-2 sm:justify-between">
+            <div @keyup.enter="search" class="cursor-pointer flex items-center sm:w-3/5 w-[45%] p-2 sm:justify-between">
                 <textarea name="" id="" class="bg-rosy outline-none placeholder:text-black focus:placeholder:text-magenta w-full h-[90%] text-wrap self-end" placeholder="Artista, evento, tipo de evento o inmueble"></textarea>
                 <svg @click="search" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 sm:size-8 ">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -39,7 +39,7 @@
 import { ref } from 'vue'
 import SearchResultItem from './SearchResultItem.vue';
 const areResultsVisible = ref(false)
-const event = ref({img: 'https://i.pinimg.com/736x/de/17/5b/de175b2222cc1981b68fc3774c157d72.jpg', eventName: "The Eras Tour", eventType: "Concierto", state: "New York", venue: "Madison Square Garden", time: "8:00 PM", month: "Septiembre", day: "15", year: "2023", dayOfWeek: "Lunes"})
+const event = ref({img: 'https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg', eventName: "The Eras Tour", eventType: "Concierto", state: "CDMX", venue: "Foro Sol", time: "8:00 PM", month: "Septiembre", day: "15", year: "2023", dayOfWeek: "Lunes"})
 const statesInMexico = ref (['Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Estado de México','Guanajuato','Guerrero','Hidalgo','Jalisco', 'Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas'])
 function search(){
     areResultsVisible.value = !areResultsVisible.value
