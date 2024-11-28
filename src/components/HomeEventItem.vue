@@ -2,9 +2,8 @@
     <div>
     
     </div>
-    <!-- no jala es esc aviso -->
-        <div v-if="isSelected" @keyup.esc="isSelected=false" tabindex="0" class="flex w-full z-50 justify-center  fixed ">
-            <EventPopup @close-popup="isSelected = false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
+        <div v-if="isSelected"  class="flex w-full z-50 justify-center  fixed ">
+            <EventPopup @close-popup="isSelected = false" @keyup.esc="isSelected=false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
         </div>
         <div class="container z-40 sm:h-96 h-84 sm:w-1/5 w-[80%] ">
             <img :src="props.img" :alt="props.eventName" @click="isSelected = !isSelected" class=" w-full h-[80%] object-cover cursor-pointer">
