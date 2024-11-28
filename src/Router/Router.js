@@ -7,6 +7,6 @@ const router = createRouter({
         {path: '/QRCD', component: () => import('../components/QRCode.vue')},
         {path: '/BRCD', component: () => import('../components/CodigoBarras.vue')}
     ]
-})
+}) 
 
 export default router
