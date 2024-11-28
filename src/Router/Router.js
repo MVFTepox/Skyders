@@ -7,7 +7,7 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: Home
-        }
+        },
         {path: '/MOMENTO', component: () => import('../components/Ev-Info.vue')},
         {path: '/QRCD', component: () => import('../components/QRCode.vue')},
         {path: '/BRCD', component: () => import('../components/CodigoBarras.vue')}
