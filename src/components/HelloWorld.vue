@@ -1,7 +1,7 @@
 <template >
-  <div class="bg-black h-screen flex flex-wrap justify-center gap-12">
+  <div class="bg-black h-[100%] flex flex-wrap justify-center gap-12">
     <div class="flex flex-col gap-4 p-6 w-full items-center">
-      <EventPopup img="https://i.pinimg.com/564x/03/0c/a2/030ca2afa8b5358993a95485b0a0bd2f.jpg" isliked="true" />
+      <!-- <EventPopup img="https://i.pinimg.com/564x/03/0c/a2/030ca2afa8b5358993a95485b0a0bd2f.jpg" isliked="true" /> -->
 
       <!-- <SearchBar></SearchBar> -->
       

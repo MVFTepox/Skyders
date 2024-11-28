@@ -1,27 +1,38 @@
 <template>
-    <div class="container">
-        <img :src="props.img" alt="" class="w-full h-[80%] object-cover cursor-pointer">
-        <div class="text-white mt-2">
-            <h3 class="font-bold hover:underline cursor-pointer">{{props.eventName}}</h3>
-            <p class="font-light text-sm">{{props.eventType}}</p>
-        </div>
+    <div>
+    
     </div>
+    <!-- no jala es esc aviso -->
+        <div v-if="isSelected" @keyup.esc="isSelected=false" tabindex="0" class="flex w-full z-50 justify-center  fixed ">
+            <EventPopup @close-popup="isSelected = false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
+        </div>
+        <div class="container z-40 sm:h-96 h-84 sm:w-1/5 w-[80%] ">
+            <img :src="props.img" :alt="props.eventName" @click="isSelected = !isSelected" class=" w-full h-[80%] object-cover cursor-pointer">
+            <div class="text-white mt-2">
+                <h3 class="font-bold hover:underline cursor-pointer">{{props.eventName}}</h3>
+                <p class="font-light text-sm">{{props.eventType}}</p>
+            </div>
+        </div>
+
 </template>
 
 <script setup>
 import { ref,defineProps } from 'vue'
+import EventPopup from './EventPopup.vue';
 
 const props = defineProps({
     img: String,
     eventName: String,
-    eventType: String
+    eventType: String,
+    id: Number
+    // Usar la id para hacer un get de solamente 1 evento para el popup
  })
+
+const isSelected = ref(false)
 </script>
 
 <style scoped>
 .container{
-    @apply w-1/5;
-    @apply h-96;
     @apply p-4;
     @apply font-made-tommy;
     @apply transition-shadow;

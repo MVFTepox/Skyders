@@ -1,6 +1,11 @@
 <template>
-    <div class="flex">
-        <div class="rounded-2xl bg-magenta justify-center sm:w-[900px] sm:h-[450px] w-full h-full"> 
+    <div class="flex shadow-md" >
+        <div class="rounded-2xl bg-magenta justify-center sm:w-[900px] sm:h-[450px] w-full h-full relative"> 
+            <button class="text-rosy rounded-full absolute top-2 right-2 hover:text-white" @click="closePopup">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </button>
             <div class="flex gap-2 p-6 h-1/2">
                 <div class="sm:w-36 w-1/2">
                     <img :src="props.img" alt="">
@@ -27,14 +32,13 @@
                 <div @click="tabIsActive = false" :class="{'tab' : true, 'border-b-[1px]' : tabIsActive === true}">Comentarios</div>
             </div>
             <div class="flex flex-col overflow-auto h-1/2 rounded-b-2xl" v-if="tabIsActive === true">
-                <EventDateItem/>
-                <EventDateItem/>
+                <EventDateItem v-for="item in 3" :key="item" @is-item-active="isItemActive"/>
             </div>
             <div v-if="tabIsActive === false" class="rounded-b-2xl flex flex-col bg-magenta h-1/2 overflow-auto">
                 <Comment user="Valeria" comment="Wow esta muy chido el concerito vale la pena chicos"/>
                 <Comment user="user" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed hendrerit sapien. In vitae elit ex. Morbi lacinia augue eget luctus congue. Duis consequat urna ligula, ultricies lacinia neque suscipit vitae. Nam dui augue, venenatis ut ante vel, egestas sollicitudin urna. Sed id consequat est, vel efficitur orci. Curabitur sit amet vulputate purus, semper viverra lorem. Vestibulum dignissim et odio sed consectetur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi eu sodales tellus. Mauris pellentesque sem sit amet arcu fermentum, et aliquet odio efficitur."/>
             </div>
-            <CustomButton @is-item-active="isShown = !isShown"  v-if="isShown"  color="black" class="hover:shadow-black/50 absolute bottom-0 left-80">Continuar a Pago</CustomButton>
+            <CustomButton  v-if="isShown.value===true"  color="black" class="hover:shadow-black/50 absolute bottom-0 left-80">Continuar a Pago</CustomButton>
         </div>
     </div>
 </template>
@@ -44,17 +48,23 @@ import CustomButton from './CustomButton.vue';
 import EventDateItem from './EventDateItem.vue';
 import Comment from './Comment.vue';
 import { ref,defineProps } from 'vue';
+const emit = defineEmits(['closePopup'])
 
 const props = defineProps({
     isLiked: Boolean,
-    img: String
+    img: String,
+    id: Number
 })
 const tabIsActive = ref(true)
 const isLiked = ref(props.isLiked)
 const isShown = ref(false)
-function showButton(itemIsActive) {
-   isShown.value = itemIsActive; // Use the boolean value directly
-    console.log(isShown.value);
+function isItemActive(value){
+    isShown.value = value;
+    console.log(value);
+}
+function closePopup(){
+    emit('closePopup');
+    console.log('close');
 }
 
 </script>

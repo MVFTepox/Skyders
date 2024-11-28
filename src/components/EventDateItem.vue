@@ -27,14 +27,15 @@
 
 <script setup>
 import { ref,defineProps } from 'vue'
-const emit =defineEmits('isItemActive')
+const $emit = defineEmits(['isItemActive'])
 
 const props = defineProps({})
 
 const itemIsActive = ref(false)
 function toggleActive() {
     itemIsActive.value = !itemIsActive.value;
-    emit('isItemActive');
+    $emit('isItemActive', itemIsActive);
+    console.log('emit enviado');
 }
 const quantity = ref(1)
 function decrement() {
