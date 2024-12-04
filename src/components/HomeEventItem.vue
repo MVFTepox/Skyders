@@ -2,16 +2,16 @@
     <div>
     
     </div>
-        <div v-if="isSelected"  class="flex w-full z-50 justify-center  fixed ">
-            <EventPopup @close-popup="isSelected = false" @keyup.esc="isSelected=false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
+    <div v-if="isSelected"  class="fixed inset-0 flex justify-center items-center z-50">
+        <EventPopup @close-popup="isSelected = false" @keyup.esc="isSelected=false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
+    </div>
+    <div class="container z-40 sm:h-96 h-84 sm:w-1/5 w-[80%] ">
+        <img :src="props.img" :alt="props.eventName" @click="isSelected = !isSelected" class=" w-full h-[80%] object-cover cursor-pointer">
+        <div class="text-white mt-2">
+            <h3 class="font-bold hover:underline cursor-pointer">{{props.eventName}}</h3>
+            <p class="font-light text-sm">{{props.eventType}}</p>
         </div>
-        <div class="container z-40 sm:h-96 h-84 sm:w-1/5 w-[80%] ">
-            <img :src="props.img" :alt="props.eventName" @click="isSelected = !isSelected" class=" w-full h-[80%] object-cover cursor-pointer">
-            <div class="text-white mt-2">
-                <h3 class="font-bold hover:underline cursor-pointer">{{props.eventName}}</h3>
-                <p class="font-light text-sm">{{props.eventType}}</p>
-            </div>
-        </div>
+    </div>
 
 </template>
 
