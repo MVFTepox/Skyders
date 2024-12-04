@@ -32,7 +32,6 @@
                 <div @click="tabIsActive = false" :class="{'tab' : true, 'border-b-[1px] w-1/4' : tabIsActive === true, 'w-3/4' :tabIsActive === false }">
                     <p v-if="tabIsActive === true">Comentarios</p>
                     <div v-if="tabIsActive === false" class="flex gap-2">
-                        <!-- <input type="text" v-model="commentToSend" placeholder="Escribe un comentario" class="rounded-lg px-1 w-3/4 outline-none text-black"> -->
                         <textarea v-model="commentToSend" placeholder="Escribe un comentario" class="rounded-lg px-1 w-3/4 h-[1.8rem] outline-none text-black" style="resize: none;" id=""></textarea>
                         <button class="rounded-lg hover:bg-rosy border-rosy border-[1px] hover:text-magenta px-1 w-1/4">Enviar</button>
                     </div>
@@ -101,6 +100,7 @@ img{
     @apply text-lg;
     @apply font-made-tommy;
     @apply rounded-t-xl;
+    @apply transition-all;
 }
 *::-webkit-scrollbar {
     display: none;
