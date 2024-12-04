@@ -14,51 +14,45 @@
       <div style="font-size: 28px;color: black;">{{ countdown }}</div>
       <button>Conocer más</button>
     </div>
-
   </div>
   <EvCarrusel />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 import EvCarrusel from './Ev-Carrusel.vue';
 
-export default defineComponent({
-  name: 'EvInfo',
-  components: {
-    EvCarrusel,
-  },
-  data() {
-    return {
-      imagen: 'https://s3-alpha-sig.figma.com/img/4070/ca67/9e25563bda4d2283df553cc8a19c8ad9?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=H8695KDsCIfLia6LpW9ySakq0PxkhA8WgNAueRtVVuETJMKFZZyE79vBC3CVjYgLSvDFioeKZYN6mEDsG~LO1AUxpLolRPwEO~iV4sMshLbgaqHjsGIW1m18VVyFF1CFVwgzMkJmVnr6p6Bu9j1cLLj85vU1hCqQ7JI-m2BIzPjMnD4jydRMb3WmPzKHMdc5gTM~X0j6DPRMXhfUNQaLsehDOm7JZ270HRKkrD80EWCZMPmIZut5ieYcfaagSyL8mzzTgof0NGaYgKwaWhz33Rrji5pZGpEVcKVBDnRIPq-rT1cLIdoRGOQak-7g9aeBu19ImA9YGciicLWjtwRyZg__', 
-      nombre: 'Zoé Tour México 2025',
-      descripcion: 'Zoé regresa a los escenarios de México con su nueva Gira 2025. Con más de dos décadas de trayectoria y éxitos que han marcado a varias generaciones, Zoé promete una serie de conciertos inolvidables, llenos de energía, psicodelia y nostalgia.',
-      fechaEvento: new Date('2024-12-12T23:59:59'),
-      countdown: '',
-    };
-  },
-  mounted() {
-    this.startCountdown();
-  },
-  methods: {
-    startCountdown() {
-      setInterval(() => {
-        const remaining = this.calculateTimeRemaining();
-        this.countdown = `${remaining.dias} días, ${remaining.horas} horas, ${remaining.minutos} minutos, ${remaining.segundos} segundos`;
-      }, 1000);
-    },
-    calculateTimeRemaining() {
-      const now = new Date();
-      const diff = this.fechaEvento - now;
+const imagen = ref(
+  'https://s3-alpha-sig.figma.com/img/4070/ca67/9e25563bda4d2283df553cc8a19c8ad9?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=H8695KDsCIfLia6LpW9ySakq0PxkhA8WgNAueRtVVuETJMKFZZyE79vBC3CVjYgLSvDFioeKZYN6mEDsG~LO1AUxpLolRPwEO~iV4sMshLbgaqHjsGIW1m18VVyFF1CFVwgzMkJmVnr6p6Bu9j1cLLj85vU1hCqQ7JI-m2BIzPjMnD4jydRMb3WmPzKHMdc5gTM~X0j6DPRMXhfUNQaLsehDOm7JZ270HRKkrD80EWCZMPmIZut5ieYcfaagSyL8mzzTgof0NGaYgKwaWhz33Rrji5pZGpEVcKVBDnRIPq-rT1cLIdoRGOQak-7g9aeBu19ImA9YGciicLWjtwRyZg__'
+);
+const nombre = ref('Zoé Tour México 2025');
+const descripcion = ref(
+  'Zoé regresa a los escenarios de México con su nueva Gira 2025. Con más de dos décadas de trayectoria y éxitos que han marcado a varias generaciones, Zoé promete una serie de conciertos inolvidables, llenos de energía, psicodelia y nostalgia.'
+);
+const fechaEvento = ref(new Date('2024-12-12T23:59:59'));
+const countdown = ref('');
 
-      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+const calculateTimeRemaining = () => {
+  const now = new Date();
+  const diff = fechaEvento.value - now;
 
-      return { dias, horas, minutos, segundos };
-    }
-  },
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+  return { dias, horas, minutos, segundos };
+};
+
+const startCountdown = () => {
+  setInterval(() => {
+    const remaining = calculateTimeRemaining();
+    countdown.value = `${remaining.dias} días, ${remaining.horas} horas, ${remaining.minutos} minutos, ${remaining.segundos} segundos`;
+  }, 1000);
+};
+
+onMounted(() => {
+  startCountdown();
 });
 </script>
 
