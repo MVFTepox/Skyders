@@ -1,5 +1,5 @@
 <template>
-    <div class="top-container ">
+    <div class="top-container interactive-bg" ref="bg">
         <div class="flex justify-between p-6">
             <img src="/public/img/skyders isotipo.png" alt="" class="w-36">
             <button class=" font-made-tommy border-rosy hover:bg-rosy hover:text-black border-[1px] text-rosy p-2 rounded-lg flex gap-2"> 
@@ -10,10 +10,7 @@
             </button>
         </div>
         <div class=" h-full flex flex-col justify-center p-6 gap-12 items-center">
-            <!-- <div class="font-made-tommy sm:w-1/2 w-full sm:h-[250px] flex flex-col gap-4 items-center sm:relative flex-none">
-                <h1 class="text-4xl font-bold text-white text-start w-2/3">Con <span class="text-yellow">SKYDERS</span> prepárate para los eventos más emocionantes de México!</h1>
-                <p class="text-lg text-white text-start sm:text-end sm:absolute sm:bottom-2 sm:w-1/2 w-2/3 sm:right-16">Encuentra boletos para todo tipo de eventos, en todo el país!</p>
-            </div> -->
+
             <div class="font-made-tommy sm:w-2/3 w-full sm:h-[250px] flex flex-col gap-4 items-center sm:relative flex-none">
                 <h1 class="sm:text-5xl text-4xl font-bold text-white text-start w-2/3">Con <span class="text-yellow">SKYDERS</span> prepárate para los eventos más emocionantes de México!</h1>
                 <p class="text-lg text-white text-start sm:text-end sm:absolute sm:bottom-0 sm:w-1/3 w-2/3 sm:right-36">Encuentra boletos para todo tipo de eventos, en todo el país!</p>
@@ -31,6 +28,21 @@
 import { ref,defineProps } from 'vue'
 import SearchBar from '../components/SearchBar.vue';
 import HomeEventItem from '../components/HomeEventItem.vue';
+import { onMounted } from "vue";
+
+let bg; // Reference for the background element
+
+onMounted(() => {
+  document.addEventListener("mousemove", (e) => {
+    // Calculate mouse coordinates as percentages
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+
+    // Dynamically adjust gradient position and size
+    bg.style.backgroundPosition = `${x}% ${y}%`;
+    bg.style.backgroundSize = `${100 + x / 2}% ${100 + y / 2}%`;
+  });
+});
 </script>
 
 <style scoped>
@@ -38,7 +50,19 @@ import HomeEventItem from '../components/HomeEventItem.vue';
     /* background: rgb(255,209,130);
     background: radial-gradient(circle, rgba(255,209,130,1) 8%, rgba(151,0,70,1) 54%, rgba(0,0,0,1) 86%); */
 
-    background: rgb(255,209,130);
-background: radial-gradient(circle, rgba(255,209,130,1) 3%, rgba(151,0,70,1) 33%, rgba(0,0,0,1) 57%);
+    /* background: rgb(255,209,130);
+    background: radial-gradient(circle, rgba(255,209,130,1) 3%, rgba(151,0,70,1) 33%, rgba(0,0,0,1) 57%); */
+}
+.interactive-bg {
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 209, 130, 1) 3%,
+    rgba(151, 0, 70, 1) 33%,
+    rgba(0, 0, 0, 1) 57%
+  );
+  background-size: 150% 150%; /* Initial size of the gradient */
+  transition: background-size 0.2s, background-position 0.2s; /* Smooth transitions */
+  overflow: hidden;
 }
 </style>

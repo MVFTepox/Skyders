@@ -1,6 +1,6 @@
 <template>
-    <div class="flex shadow-md" >
-        <div class="rounded-2xl bg-magenta justify-center sm:w-[900px] sm:h-[450px] w-full h-full relative"> 
+    <div class="flex shadow-md justify-center items-center w-screen h-screen backdrop-blur-xl" >
+        <div class="rounded-2xl bg-magenta justify-center sm:w-[900px] sm:h-[450px] w-[90%] sm:m-0 mb-[2rem] h-[90vh] relative"> 
             <button class="text-rosy rounded-full absolute top-2 right-2 hover:text-white" @click="closePopup">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -27,9 +27,15 @@
                     <p class="font-light text-white text-wrap overflow-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaesque. Quisquam consectetur adipisicing elit. Quisquam, quaesque. Quisquam lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaesque.</p>
                 </div>
             </div>
-            <div class="flex w-full ">
-                <div  @click="tabIsActive = true" :class="{'tab' : true, 'border-b-[1px]' : tabIsActive === false}">Fechas</div>
-                <div @click="tabIsActive = false" :class="{'tab' : true, 'border-b-[1px]' : tabIsActive === true}">Comentarios</div>
+            <div class="flex w-full items-center py-1">
+                <div  @click="tabIsActive = true" :class="{'tab' : true, 'border-b-[1px] w-1/4' : tabIsActive === false, 'w-3/4' :tabIsActive === true}">Fechas</div>
+                <div @click="tabIsActive = false" :class="{'tab' : true, 'border-b-[1px] w-1/4' : tabIsActive === true, 'w-3/4' :tabIsActive === false }">
+                    <p v-if="tabIsActive === true">Comentarios</p>
+                    <div v-if="tabIsActive === false" class="flex gap-2">
+                        <textarea v-model="commentToSend" placeholder="Escribe un comentario" class="rounded-lg px-1 w-3/4 h-[1.8rem] outline-none text-black" style="resize: none;" id=""></textarea>
+                        <button class="rounded-lg hover:bg-rosy border-rosy border-[1px] hover:text-magenta px-1 w-1/4">Enviar</button>
+                    </div>
+                </div>
             </div>
             <div class="flex flex-col overflow-auto h-1/2 rounded-b-2xl" v-if="tabIsActive === true">
                 <EventDateItem v-for="item in 3" :key="item" @is-item-active="isItemActive"/>
@@ -38,7 +44,7 @@
                 <Comment user="Valeria" comment="Wow esta muy chido el concerito vale la pena chicos"/>
                 <Comment user="user" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed hendrerit sapien. In vitae elit ex. Morbi lacinia augue eget luctus congue. Duis consequat urna ligula, ultricies lacinia neque suscipit vitae. Nam dui augue, venenatis ut ante vel, egestas sollicitudin urna. Sed id consequat est, vel efficitur orci. Curabitur sit amet vulputate purus, semper viverra lorem. Vestibulum dignissim et odio sed consectetur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi eu sodales tellus. Mauris pellentesque sem sit amet arcu fermentum, et aliquet odio efficitur."/>
             </div>
-            <CustomButton  v-if="isShown.value===true"  color="black" class="hover:shadow-black/50 absolute bottom-0 left-80">Continuar a Pago</CustomButton>
+            <CustomButton  v-if="isShown.value===true"  color="black" class="hover:shadow-black/50 absolute bottom-0 sm:left-80 left-1/4">Continuar a Pago</CustomButton>
         </div>
     </div>
 </template>
@@ -58,6 +64,10 @@ const props = defineProps({
 const tabIsActive = ref(true)
 const isLiked = ref(props.isLiked)
 const isShown = ref(false)
+const commentToSend = ref('')
+function postComment(){
+    
+}
 function isItemActive(value){
     isShown.value = value;
     console.log(value);
@@ -85,10 +95,12 @@ img{
     @apply border-white;
     @apply cursor-pointer;
     @apply text-white;
-    @apply w-1/2;
+
     @apply px-6;
     @apply text-lg;
     @apply font-made-tommy;
+    @apply rounded-t-xl;
+    @apply transition-all;
 }
 *::-webkit-scrollbar {
     display: none;
