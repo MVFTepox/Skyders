@@ -1,7 +1,5 @@
 <template>
-    <div>
-    
-    </div>
+
     <div v-if="isSelected"  class="fixed inset-0 flex justify-center items-center z-50">
         <EventPopup @close-popup="isSelected = false" @keyup.esc="isSelected=false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>
     </div>

@@ -1,8 +1,8 @@
 <template>
-    <div class="top-container interactive-bg" ref="bg">
+    <div class="interactive-bg" ref="bg">
         <div class="flex justify-between p-6">
             <img src="/public/img/skyders isotipo.png" alt="" class="w-36">
-            <button class=" font-made-tommy border-rosy hover:bg-rosy hover:text-black border-[1px] text-rosy p-2 rounded-lg flex gap-2"> 
+            <button @click="router.push('/iniciar-sesion')" class=" font-made-tommy border-rosy hover:bg-rosy hover:text-black border-[1px] text-rosy p-2 rounded-lg flex gap-2"> 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
@@ -17,10 +17,16 @@
             </div>
             <SearchBar></SearchBar>
         </div>
-        
+        <div>
+          <EvInfo></EvInfo>
+        </div>
     </div>
-    <div class="bg-black flex flex-wrap gap-8 p-4 justify-center">
-        <HomeEventItem v-for="item in 5" :key="item" eventName="The Eras Tour" eventType="Concierto" img="https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg"></HomeEventItem>
+    <div class="bg-black flex flex-col p-4 items-center">
+        <h2 class="text-3xl font-bold text-white font-made-tommy p-6">Todos los Eventos</h2>
+        <div class="flex flex-wrap gap-8 justify-center">
+          <HomeEventItem v-for="item in 5" :key="item" eventName="The Eras Tour" eventType="Concierto" img="https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg"></HomeEventItem>
+          
+        </div>
     </div>
 </template>
 
@@ -28,8 +34,10 @@
 import { ref,defineProps } from 'vue'
 import SearchBar from '../components/SearchBar.vue';
 import HomeEventItem from '../components/HomeEventItem.vue';
+import EvInfo from '../components/Ev-Info.vue';
 import { onMounted } from "vue";
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 let bg; // Reference for the background element
 
 onMounted(() => {
@@ -46,13 +54,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.top-container{
-    /* background: rgb(255,209,130);
-    background: radial-gradient(circle, rgba(255,209,130,1) 8%, rgba(151,0,70,1) 54%, rgba(0,0,0,1) 86%); */
 
-    /* background: rgb(255,209,130);
-    background: radial-gradient(circle, rgba(255,209,130,1) 3%, rgba(151,0,70,1) 33%, rgba(0,0,0,1) 57%); */
-}
 .interactive-bg {
 
   background: radial-gradient(

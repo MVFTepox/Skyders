@@ -5,12 +5,20 @@
   <div class="carrusel-container">
     <div class="carrusel" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
       <div class="carrusel-item" v-for="(image, index) in images" :key="index">
-        <img :src="image" alt="Evento imagen" class="carrusel-img" />
+        <img :src="image" alt="Evento imagen" class="w-screen h-[400px] object-contain object-scale-down" />
       </div>
     </div>
     <!-- Botones de navegación -->
-    <button class="carrusel-btn prev" @click="goPrev">←</button>
-    <button class="carrusel-btn next" @click="goNext">→</button>
+    <button class="carrusel-btn prev" @click="goPrev">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+      </svg>
+    </button>
+    <button class="carrusel-btn next" @click="goNext">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -75,10 +83,11 @@ onBeforeUnmount(() => {
 }
 
 .eventos-titulo {
-  font-size: 38px;
-  padding-top: 3%;
-  padding-bottom: 1%;
-  color: aliceblue;
+  @apply text-3xl;
+  @apply font-bold;
+  @apply p-6;
+  @apply text-white;
+  @apply font-made-tommy;
 }
 
 .carrusel-container {
@@ -90,6 +99,7 @@ onBeforeUnmount(() => {
 
 .carrusel {
   display: flex;
+  @apply items-start;
   transition: transform 0.5s ease;
 }
 
@@ -98,21 +108,19 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 
-.carrusel-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .carrusel-btn {
+  @apply flex;
+  @apply items-center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  @apply bg-magenta;
   color: white;
   font-size: 2em;
   border: none;
-  padding: 10px;
+  @apply p-2;
+  @apply rounded-full;
   cursor: pointer;
   z-index: 10;
 }
@@ -122,7 +130,7 @@ onBeforeUnmount(() => {
 }
 
 .carrusel-btn.next {
-  right: 10px;
+  right: 30px;
 }
 
 .carrusel-btn:hover {
