@@ -6,6 +6,7 @@ import pago from '../pago.vue'
 import admin from '../admin.vue'
 import postal from '../postal.vue'
 import estadistica from '../estadistica.vue'
+import EventRegister from '../views/EventRegister.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -27,7 +28,7 @@ const router = createRouter({
         },
         {
             path: '/iniciar-sesion/postal',
-            name: 'iniciar-sesion',
+            name: 'iniciar-sesion-postal',
             component: postal
         },
         {
@@ -50,6 +51,11 @@ const router = createRouter({
             name: 'organizador',
             component: estadistica
         },
+        {
+            path: '/registro-evento',
+            name: 'registro-evento',
+            component: EventRegister
+        }
 
     ]
 }) 
