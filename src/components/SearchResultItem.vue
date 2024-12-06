@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full flex items-center h-48 p-4 px-8 gap-6 sm:gap-12 border-b-[1px] border-white cursor-pointer font-made-tommy">
-        <img :src="props.img" alt="" class="w-[15%] h-full object-cover object-center">
+    <div @click="isSelected = !isSelected" class="w-full flex items-center h-48 p-4 px-8 gap-6 sm:gap-12 border-b-[1px] border-white cursor-pointer font-made-tommy">
+        <img :src="props.img" alt="" class="w-[15%] h-full object-cover object-center" >
         <div class="flex flex-col gap-4">
             <p class="text-yellow text-sm md:text-base">{{ props.eventType }}</p>
             <h3 class="font-bold text-xl sm:text-2xl text-white">{{ props.eventName }}</h3>
@@ -15,10 +15,14 @@
             <p class="font-bold text-white">{{ props.state}} • {{ props.venue }}</p>
         </div>
     </div>
+    <div v-if="isSelected" class="fixed inset-0 flex justify-center items-center z-50" >
+        <EventPopup @close-popup="isSelected = false" @keyup.esc="isSelected=false"  :id="props.id"  class="absolute bottom-0 " ></EventPopup>`
+    </div>
 </template>
 
 <script setup>
 import { ref,defineProps } from 'vue'
+import EventPopup from './EventPopup.vue';
 const props = defineProps({
     img: String,
     eventName: String,
@@ -31,6 +35,7 @@ const props = defineProps({
     year: String,
     dayOfWeek: String
 })
+const isSelected = ref(false);
 // const isPM = ref(true)
 // const PMOrAM = ref('')
 // isPm === true ? PMOrAM = 'pm' : PMOrAM = 'am'
