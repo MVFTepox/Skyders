@@ -54,13 +54,16 @@ import CustomButton from './CustomButton.vue';
 import EventDateItem from './EventDateItem.vue';
 import Comment from './Comment.vue';
 import { ref,defineProps } from 'vue';
+import { useEventsStore } from '../stores/eventsStore';
 const emit = defineEmits(['closePopup'])
 
 const props = defineProps({
     isLiked: Boolean,
     img: String,
-    id: Number
+    _id: String
 })
+
+console.log(props._id);
 const tabIsActive = ref(true)
 const isLiked = ref(props.isLiked)
 const isShown = ref(false)
