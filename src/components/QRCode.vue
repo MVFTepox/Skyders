@@ -1,9 +1,8 @@
 <template>
-    <router-link to="/BRCODE" exact class="router">Barras</router-link>
     <div class="qr-container">
-      <qrcode :value="paymentData" :size="300" />
+      <qrcode :value="paymentData" :size="200" />
       
-      <button @click="togglePaymentStatus">
+      <button @click="togglePaymentStatus" style="color: white;" >
         Cambiar estado a {{ paymentStatus === 'pagado' ? 'no pagado' : 'pagado' }}
       </button>
     </div>
@@ -29,7 +28,7 @@
       Subtotal: $${subtotal.toFixed(2)}
       IVA: 16% ($${iva.toFixed(2)})
       Total: $${total.toFixed(2)}
-      Destino de Pago: Banorte o OXXO
+      Destino de Pago: Banorte u OXXO
     `;
   }
   
@@ -40,11 +39,6 @@
   </script>
   
   <style scoped>
-  .router {
-    position: absolute;
-    left: 0%;
-  }
-  
   .qr-container {
     text-align: center;
     margin-top: 20%;

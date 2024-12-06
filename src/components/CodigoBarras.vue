@@ -1,9 +1,8 @@
 <template>
-    <router-link to="/QRCODE" exact class="router">Barras</router-link>
     <div class="qr-container">
       <svg id="barcode"></svg>
       
-      <button @click="togglePaymentStatus">
+      <button @click="togglePaymentStatus" style="color: white;" >
         Cambiar estado a {{ paymentStatus === 'pagado' ? 'no pagado' : 'pagado' }}
       </button>
     </div>
@@ -16,41 +15,36 @@
   // Inicializar estado de pago
   const paymentStatus = ref('no pagado');
   
-  // Cambiar estado de pago
+  
   function togglePaymentStatus() {
     paymentStatus.value = paymentStatus.value === 'pagado' ? 'no pagado' : 'pagado';
-    generarCodigoBarras(); // Actualizar el código de barras después de cambiar el estado
+    generarCodigoBarras(); 
   }
   
-  // Generar el código de barras
+  
   function generarCodigoBarras() {
     const svgElement = document.getElementById("barcode");
   
     if (svgElement) {
-      // Usar el estado de pago para generar el código de barras
+      
       JsBarcode(svgElement, paymentStatus.value, {
         format: "CODE128",
         width: 2,
         height: 40,
-        displayValue: false // No mostrar el valor numérico del código de barras
+        displayValue: false 
       });
     } else {
       console.error("No se pudo encontrar el elemento SVG para generar el código de barras.");
     }
   }
   
-  // Generar el código de barras al montar el componente
+  
   onMounted(() => {
-    generarCodigoBarras(); // Generar el código de barras inicialmente con el estado de pago por defecto
+    generarCodigoBarras(); 
   });
   </script>
   
   <style scoped>
-  .router {
-    position: absolute;
-    left: 0%;
-  }
-  
   .qr-container {
     text-align: center;
     margin-top: 20%;

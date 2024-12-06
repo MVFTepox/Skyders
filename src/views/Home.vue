@@ -20,7 +20,8 @@
             </div>
             <SearchBar></SearchBar>
         </div>
-        
+        <EvInfo/>
+       
     </div>
     <div class="bg-black flex flex-wrap gap-8 p-4 justify-center">
         <HomeEventItem v-for="item in 5" :key="item" eventName="The Eras Tour" eventType="Concierto" img="https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg"></HomeEventItem>
@@ -31,6 +32,8 @@
 import { ref,defineProps } from 'vue'
 import SearchBar from '../components/SearchBar.vue';
 import HomeEventItem from '../components/HomeEventItem.vue';
+import EvInfo from '../components/Ev-Info.vue';
+
 </script>
 
 <style scoped>

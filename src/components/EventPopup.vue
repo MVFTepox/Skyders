@@ -38,7 +38,11 @@
                 <Comment user="Valeria" comment="Wow esta muy chido el concerito vale la pena chicos"/>
                 <Comment user="user" comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed hendrerit sapien. In vitae elit ex. Morbi lacinia augue eget luctus congue. Duis consequat urna ligula, ultricies lacinia neque suscipit vitae. Nam dui augue, venenatis ut ante vel, egestas sollicitudin urna. Sed id consequat est, vel efficitur orci. Curabitur sit amet vulputate purus, semper viverra lorem. Vestibulum dignissim et odio sed consectetur. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi eu sodales tellus. Mauris pellentesque sem sit amet arcu fermentum, et aliquet odio efficitur."/>
             </div>
-            <CustomButton  v-if="isShown.value===true"  color="black" class="hover:shadow-black/50 absolute bottom-0 left-80">Continuar a Pago</CustomButton>
+            <router-link v-if="isShown.value" to="/Compra">
+                <CustomButton color="black" class="hover:shadow-black/50 absolute bottom-0 left-80">
+                    Continuar a Pago
+                </CustomButton>
+            </router-link>
         </div>
     </div>
 </template>
