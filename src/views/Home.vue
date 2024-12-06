@@ -24,7 +24,7 @@
     <div class="bg-black flex flex-col p-4 items-center">
         <h2 class="text-3xl font-bold text-white font-made-tommy p-6">Todos los Eventos</h2>
         <div class="flex flex-wrap gap-8 justify-center">
-          <HomeEventItem v-for="item in 5" :key="item" eventName="The Eras Tour" eventType="Concierto" img="https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg"></HomeEventItem>
+          <HomeEventItem v-for="item in events" :key="item" eventName="item.Name" eventType="item.Type" img="item.imgEvent"></HomeEventItem>
           
         </div>
     </div>
@@ -32,6 +32,9 @@
 
 <script setup>
 import { ref,defineProps } from 'vue'
+
+import { useEventStore } from '../Stores/eventsStore';
+
 import SearchBar from '../components/SearchBar.vue';
 import HomeEventItem from '../components/HomeEventItem.vue';
 import EvInfo from '../components/Ev-Info.vue';
@@ -40,6 +43,14 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 let bg; // Reference for the background element
 
+const Events = useEventStore();
+const events = ref([]);
+events.value = Events.fetchEvents();
+
+
+
+
+
 onMounted(() => {
   document.addEventListener("mousemove", (e) => {
     // Calculate mouse coordinates as percentages
@@ -47,7 +58,7 @@ onMounted(() => {
     const y = (e.clientY / window.innerHeight) * 100;
 
     // Dynamically adjust gradient position and size
-    bg.style.backgroundPosition = `${x}% ${y}%`;
+    bg.style.backgroundPosition = `${y}% ${y}%`;
     bg.style.backgroundSize = `${100 + x / 2}% ${100 + y / 2}%`;
   });
 });

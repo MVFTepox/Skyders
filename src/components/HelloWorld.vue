@@ -6,7 +6,7 @@
       <!-- <SearchBar></SearchBar> -->
       
     </div>
-    <HomeEventItem v-for="item in arr" :key="item" :eventName="item.eventName" :eventType="item.eventType" :img="item.img"></HomeEventItem>
+    <HomeEventItem v-for="item in arr" :key="item" :eventName="item." :eventType="item.eventType" :img="item.imgEvent"></HomeEventItem>
   </div>
   <div class="bg-black flex justify-center">
 
@@ -17,17 +17,17 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useEventStore } from '../Stores/eventsStore';
 import CustomButton from './CustomButton.vue';
 import HomeEventItem from './HomeEventItem.vue';
 import SearchResultItem from './SearchResultItem.vue';
 import SearchBar from './SearchBar.vue';
 import EventPopup from './EventPopup.vue';
-const arr = [
-  {img: "https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
-  {img: "https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
-  {img: "https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
-  {img: "https://i.pinimg.com/736x/66/da/7d/66da7d37a993cf458796ed5eca2de17f.jpg", eventName: "The Eras Tour", eventType: "Concierto"},
-  ]
+
+const store = useEventStore();
+const arr = ref([]);
+arr.value = store.getEvents;
+
 </script>
 <style scoped>
 
